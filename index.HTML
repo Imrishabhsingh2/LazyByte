@@ -1288,7 +1288,10 @@ function go(where){
   document.getElementById('site').classList.toggle('hidden',admin);
   document.getElementById('siteFooter').classList.toggle('hidden',admin);
   document.getElementById('adminView').classList.toggle('hidden',!admin);
-  document.getElementById('orderBtn').classList.toggle('hidden',admin);
+  const orderBtn = document.getElementById('orderBtn');
+  if (orderBtn) {
+    orderBtn.classList.toggle('hidden', admin);
+  }
 
   // Close mobile menu if open
   const navLinks = document.querySelector('.nav-links');
