@@ -63,61 +63,232 @@ header{position:sticky;top:0;z-index:50;background:rgba(10,10,11,.9);
 .hamburger{display:none;background:none;border:none;color:#fff;font-size:26px;cursor:pointer;transition:transform 0.3s ease, color 0.2s ease}
 .hamburger:hover{color:var(--orange)}
 
-/* ---------- Hero ---------- */
-.hero{position:relative;overflow:hidden;
-  background:radial-gradient(900px 500px at 78% 40%,rgba(244,83,27,.35),transparent 62%),
-             radial-gradient(700px 500px at 95% 10%,rgba(120,20,10,.4),transparent 60%),
-             linear-gradient(120deg,#130a08 0%,#090505 55%,#08080a 100%)}
-.hero::after{content:"";position:absolute;inset:0;
-  background:radial-gradient(2px 2px at 60% 30%,rgba(255,140,80,.3),transparent),
-            radial-gradient(2px 2px at 72% 55%,rgba(255,120,60,.2),transparent),
-            radial-gradient(1px 1px at 55% 65%,rgba(255,160,90,.3),transparent);opacity:.6;pointer-events:none}
-.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:10px;
-  align-items:center;padding:56px 0 66px;min-height:560px}
-.tag{display:inline-block;background:#c0330f;color:#fff;font-weight:800;font-size:12px;
-  letter-spacing:1px;padding:7px 16px;border-radius:4px;margin-bottom:22px;
-  transform:skewX(-8deg);box-shadow:0 4px 14px rgba(244,83,27,.4)}
-.tag span{color:var(--orange-2)}
-.hero h1{font-size:82px;line-height:.9;font-weight:900;letter-spacing:-2px;
-  text-shadow:0 4px 30px rgba(0,0,0,.5)}
-.hero h1 .o{color:var(--orange)}
-.hero .sub{color:#e8e8ea;font-weight:800;letter-spacing:3px;font-size:15px;
-  margin:22px 0 30px;text-transform:uppercase;display:flex;align-items:center;gap:12px}
-.hero .sub::before,.hero .sub::after{content:"";width:26px;height:2px;background:var(--orange)}
-.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
-.hero-art{position:relative;display:flex;justify-content:center;align-items:center;min-height:460px}
-.burger{font-size:300px;line-height:1;filter:drop-shadow(0 30px 60px rgba(244,83,27,.55));
-  animation:float 5.5s ease-in-out infinite}
-.burger img{width:440px;height:400px;max-width:400px;object-fit:cover;border-radius:50%;
-  border:6px solid rgba(255,255,255,.06);box-shadow:0 30px 70px rgba(244,83,27,.4)}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
-.fresh{position:absolute;bottom:40px;left:6%;background:#0a0a0b;border:2px solid var(--orange);
-  width:112px;height:112px;border-radius:50%;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;font-weight:900;font-size:13px;text-align:center;transform:rotate(-10deg);
-  box-shadow:0 8px 24px rgba(0,0,0,.5)}
-.fresh b{color:var(--orange);font-size:20px;margin:2px 0}
-/* phone in hero */
-.hero-phone{position:absolute;right:-10px;bottom:-66px;width:210px;height:430px;background:#0d0d0f;
-  border-radius:34px;border:7px solid #2a2a2e;box-shadow:0 30px 60px rgba(0,0,0,.6);overflow:hidden;z-index:3;
-  display:flex;flex-direction:column}
-.hero-phone .pscreen{padding:14px 12px;font-size:11px;flex:1;position:relative;display:flex;flex-direction:column;padding-bottom:45px}
-.phead{display:flex;justify-content:space-between;align-items:center;font-size:9px;color:#bbb;margin-bottom:8px}
-.pbanner{background:linear-gradient(120deg,#3a140c,#F4531B);border-radius:12px;padding:12px;margin-bottom:10px}
-.pbanner b{font-size:16px;display:block;line-height:1}
-.pbanner .po{color:#ffd9c9;font-size:9px;letter-spacing:1px}
-.pbtn{background:#fff;color:#111;font-size:9px;font-weight:800;border-radius:20px;padding:5px 10px;display:inline-block;margin-top:8px}
-.pcats{display:flex;justify-content:space-between;margin:10px 2px;text-align:center}
-.pcat-item{display:flex;flex-direction:column;align-items:center;gap:3px;color:#ccc}
-.pcat-item span{font-size:14px}
-.pcat-item small{font-size:7.5px;font-weight:700}
-.ppick{display:flex;align-items:center;gap:8px;background:#1b1b1e;border-radius:10px;padding:7px 8px;margin-bottom:6px}
-.ppick .pi{font-size:18px}.ppick .pn{flex:1;font-size:9px}
-.ppick .pa{background:var(--orange);color:#fff;font-size:8px;font-weight:800;border-radius:12px;padding:4px 8px}
-.pnav{display:flex;justify-content:space-between;padding:8px 6px;background:#141416;border-top:1px solid #2a2a2e;position:absolute;bottom:0;left:0;right:0}
-.pnav-item{display:flex;flex-direction:column;align-items:center;font-size:9px;color:#888;cursor:pointer;flex:1}
-.pnav-item.active{color:var(--orange)}
-.pnav-item span{font-size:12px}
-.pnav-item small{font-size:8px;font-weight:600;margin-top:2px}
+/* ---------- Hero Slider ---------- */
+.hero-slider {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 580px;
+  background: var(--bg);
+}
+.slider-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
+}
+.slide-inner {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 40px;
+  align-items: center;
+  padding: 40px 0;
+  width: 100%;
+}
+.slide-content {
+  text-align: left;
+}
+.slide-tag {
+  display: inline-block;
+  background: #c0330f;
+  color: #fff;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  transform: skewX(-8deg);
+  box-shadow: 0 4px 14px rgba(244,83,27,0.35);
+}
+.slide-title {
+  font-size: 68px;
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -2px;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  margin-bottom: 18px;
+}
+.slide-title .o {
+  color: var(--orange);
+}
+.slide-desc {
+  color: #e8e8ea;
+  font-size: 15px;
+  max-width: 500px;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+.slide-cta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.slide-art {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.slide-img-container {
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 6px solid rgba(255,255,255,.05);
+  box-shadow: 0 25px 60px rgba(244,83,27,0.35);
+  animation: float-slide 5.5s ease-in-out infinite;
+  position: relative;
+}
+.slide-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.slide-img-container:hover img {
+  transform: scale(1.05);
+}
+@keyframes float-slide {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.slide-floating-badge {
+  position: absolute;
+  bottom: 25px;
+  left: 5%;
+  background: #0a0a0b;
+  border: 2px solid var(--orange);
+  padding: 10px 18px;
+  border-radius: 40px;
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  transform: rotate(-8deg);
+  animation: float-badge 5.5s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+@keyframes float-badge {
+  0%, 100% { transform: translateY(0) rotate(-8deg); }
+  50% { transform: translateY(-12px) rotate(-4deg); }
+}
+
+/* Slide elements staggering animations */
+.slide-tag, .slide-title, .slide-desc, .slide-cta {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.slide-art {
+  opacity: 0;
+  transform: scale(0.92) translateX(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.2s;
+}
+.slide.active .slide-tag {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.1s;
+}
+.slide.active .slide-title {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.25s;
+}
+.slide.active .slide-desc {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.4s;
+}
+.slide.active .slide-cta {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.55s;
+}
+.slide.active .slide-art {
+  opacity: 1;
+  transform: scale(1) translateX(0);
+}
+
+/* Navigation controls */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(15, 15, 17, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 26px;
+  font-family: inherit;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+.slider-arrow:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+  box-shadow: 0 0 15px rgba(244, 83, 27, 0.4);
+  transform: translateY(-50%) scale(1.05);
+}
+.slider-arrow.prev {
+  left: 25px;
+}
+.slider-arrow.next {
+  right: 25px;
+}
+.slider-dots {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+.slider-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.slider-dot:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+.slider-dot.active {
+  background: var(--orange);
+  width: 28px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(244, 83, 27, 0.4);
+}
 
 /* ---------- Feature strip ---------- */
 .features{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);
@@ -450,9 +621,55 @@ footer{background:#050506;border-top:1px solid var(--line);margin-top:40px;paddi
     from{opacity:0;transform:translateX(-15px)}
     to{opacity:1;transform:translateX(0)}
   }
-  .hero-inner{grid-template-columns:1fr;text-align:center;min-height:auto}
-  .hero h1{font-size:60px}.hero .sub{justify-content:center}.hero-cta{justify-content:center}
-  .burger{font-size:220px}.fresh{left:20%}.hero-phone{display:none}
+  .hero-slider {
+    height: 700px;
+  }
+  .slide {
+    padding: 20px 0;
+  }
+  .slide-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 24px;
+    padding: 20px 0;
+  }
+  .slide-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .slide-title {
+    font-size: 52px;
+  }
+  .slide-desc {
+    font-size: 14px;
+    max-width: 440px;
+    margin-bottom: 20px;
+  }
+  .slide-cta {
+    justify-content: center;
+  }
+  .slide-img-container {
+    width: 260px;
+    height: 260px;
+  }
+  .slide-floating-badge {
+    left: 12%;
+    bottom: 15px;
+    font-size: 11px;
+    padding: 8px 14px;
+  }
+  .slider-arrow {
+    width: 42px;
+    height: 42px;
+    font-size: 22px;
+  }
+  .slider-arrow.prev {
+    left: 15px;
+  }
+  .slider-arrow.next {
+    right: 15px;
+  }
   .features,.menu-row,.menu-grid,.stats,.foot-grid{grid-template-columns:1fr 1fr}
   .menu-layout,.two{grid-template-columns:1fr}
   .feature{border-right:none;border-bottom:1px solid var(--line)}
@@ -473,7 +690,20 @@ footer{background:#050506;border-top:1px solid var(--line);margin-top:40px;paddi
 }
 @media(max-width:600px){
   .menu-row,.menu-grid,.features,.stats,.foot-grid{grid-template-columns:1fr}
-  .hero h1{font-size:44px}h2.big{font-size:32px}.panel h3{font-size:26px}
+  .hero-slider {
+    height: 600px;
+  }
+  .slide-title {
+    font-size: 36px;
+  }
+  .slide-img-container {
+    width: 200px;
+    height: 200px;
+  }
+  .slide-floating-badge {
+    display: none;
+  }
+  h2.big{font-size:32px}.panel h3{font-size:26px}
   .paymethods{grid-template-columns:1fr}.mini-phone{display:none}
   .offer-mid .big{font-size:32px}.offer-mid .big b{font-size:40px}
 }
@@ -510,36 +740,119 @@ footer{background:#050506;border-top:1px solid var(--line);margin-top:40px;paddi
 <!-- ============ CUSTOMER SITE ============ -->
 <main id="site">
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="wrap hero-inner">
-      <div>
-        <span class="tag">GOOD <span>FOOD.</span> GOOD MOOD.</span>
-        <h1>HUNGRY?<br><span class="o">LET'S MEAT UP.</span></h1>
-        <p class="sub">Fast Bytes. Lazy Vibes.</p>
-        <div class="hero-cta">
-          <button class="btn btn-primary" onclick="go('menu')">ORDER NOW →</button>
-          <button class="btn btn-ghost" onclick="go('menu')">EXPLORE MENU →</button>
+  <!-- HERO SLIDER -->
+  <section class="hero-slider" id="home">
+    <div class="slider-track" id="sliderTrack">
+      <!-- Slide 1: Signature Zinger Burger -->
+      <div class="slide active" style="background: radial-gradient(circle at 75% 50%, rgba(244, 83, 27, 0.25) 0%, transparent 60%), linear-gradient(135deg, #130a08 0%, #08080a 100%);">
+        <div class="wrap slide-inner">
+          <div class="slide-content">
+            <span class="slide-tag">BESTSELLER</span>
+            <h1 class="slide-title">DOUBLE STACK.<br><span class="o">BIG FLAVOR.</span></h1>
+            <p class="slide-desc">Our signature Signature Zinger Burger: double-stack crispy chicken, cheddar, fresh lettuce & our secret lazy sauce.</p>
+            <div class="slide-cta">
+              <button class="btn btn-primary" onclick="addToCart(1); openCart();">ORDER NOW · ₹149</button>
+              <button class="btn btn-ghost" onclick="go('menu'); setCat('All'); if(document.getElementById('fullMenu').classList.contains('hidden')) toggleFullMenu();">EXPLORE MENU →</button>
+            </div>
+          </div>
+          <div class="slide-art">
+            <div class="slide-img-container">
+              <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&h=800&fit=crop&q=85&auto=format" alt="Signature Zinger Burger">
+            </div>
+            <div class="slide-floating-badge">🔥 TOP SELLER</div>
+          </div>
         </div>
       </div>
-      <div class="hero-art">
-        <div class="burger"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&h=800&fit=crop&q=85&auto=format" alt="Signature burger" onerror="this.parentElement.textContent='🍔'"></div>
-        <div class="fresh">MADE<br><b>FRESH</b><br>DAILY</div>
-        <!-- app phone peeking in -->
-        <div class="hero-phone">
-          <div class="pscreen">
-            <div class="phead"><img src="logo.png" style="height:11px;object-fit:contain" alt="Logo"><span>City Square Mall ▾</span></div>
-            <div class="pbanner"><span class="po">HUNGRY?</span><b>LET'S MEAT UP.</b>
-              <div class="pbtn">ORDER NOW →</div></div>
-            <div class="pcats"><span>🍔</span><span>🍟</span><span>🥤</span><span>🍰</span></div>
-            <div style="font-weight:800;font-size:10px;margin:6px 2px">Popular Picks</div>
-            <div class="ppick"><span class="pi">🍔</span><span class="pn">Zinger Burger<br>₹149</span><span class="pa">ADD</span></div>
-            <div class="ppick"><span class="pi">🍟</span><span class="pn">Crispy Fries<br>₹89</span><span class="pa">ADD</span></div>
-            <div class="ppick"><span class="pi">🥤</span><span class="pn">Cold Coffee<br>₹49</span><span class="pa">ADD</span></div>
+
+      <!-- Slide 2: Free Cold Coffee Offer -->
+      <div class="slide" style="background: radial-gradient(circle at 75% 50%, rgba(55, 194, 107, 0.15) 0%, transparent 60%), linear-gradient(135deg, #091a10 0%, #08080a 100%);">
+        <div class="wrap slide-inner">
+          <div class="slide-content">
+            <span class="slide-tag" style="background: #37c26b;">SPECIAL OFFER</span>
+            <h1 class="slide-title" style="text-shadow: 0 4px 30px rgba(55,194,107,0.25);">FIRST 100 COFFEES<br><span class="o" style="color: var(--green);">100% FREE!</span></h1>
+            <p class="slide-desc">Celebrate our opening day special! Get a rich, creamy, chilled Cold Coffee completely free on orders above ₹299.</p>
+            <div class="slide-cta">
+              <button class="btn btn-primary" style="background: var(--green);" onclick="addToCart(7); openCart();">CLAIM OFFER NOW</button>
+              <button class="btn btn-ghost" onclick="go('offers')">KNOW MORE →</button>
+            </div>
+          </div>
+          <div class="slide-art">
+            <div class="slide-img-container" style="box-shadow: 0 25px 60px rgba(55,194,107,0.25);">
+              <img src="https://images.unsplash.com/photo-1577968897966-3d4325b36b61?w=800&h=800&fit=crop&q=85&auto=format" alt="Opening Day Free Cold Coffee">
+            </div>
+            <div class="slide-floating-badge" style="border-color: var(--green);">☕ FREE GIFT</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Crispy Peri Peri Fries -->
+      <div class="slide" style="background: radial-gradient(circle at 75% 50%, rgba(244, 100, 27, 0.2) 0%, transparent 60%), linear-gradient(135deg, #180d05 0%, #08080a 100%);">
+        <div class="wrap slide-inner">
+          <div class="slide-content">
+            <span class="slide-tag">CRUNCHY & SPICY</span>
+            <h1 class="slide-title">CRISPY FRIES.<br><span class="o">PERI PERI KICK.</span></h1>
+            <p class="slide-desc">Golden, extra crunchy fries tossed in our signature hot peri-peri spice blend. The perfect kick to satisfy your snack cravings.</p>
+            <div class="slide-cta">
+              <button class="btn btn-primary" onclick="addToCart(5); openCart();">ORDER NOW · ₹99</button>
+              <button class="btn btn-ghost" onclick="go('menu'); setCat('Sides'); if(document.getElementById('fullMenu').classList.contains('hidden')) toggleFullMenu();">EXPLORE SIDES →</button>
+            </div>
+          </div>
+          <div class="slide-art">
+            <div class="slide-img-container" style="box-shadow: 0 25px 60px rgba(244,100,27,0.3);">
+              <img src="https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?w=800&h=800&fit=crop&q=85&auto=format" alt="Crispy Peri Peri Fries">
+            </div>
+            <div class="slide-floating-badge">🍟 HOT & SPICY</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Ultimate Combo Meal -->
+      <div class="slide" style="background: radial-gradient(circle at 75% 50%, rgba(244, 83, 27, 0.22) 0%, transparent 60%), linear-gradient(135deg, #170b05 0%, #08080a 100%);">
+        <div class="wrap slide-inner">
+          <div class="slide-content">
+            <span class="slide-tag">BEST VALUE</span>
+            <h1 class="slide-title">THE LAZY TRIO<br><span class="o">COMBO MEAL</span></h1>
+            <p class="slide-desc">Save big with our ultimate combo: classic double burger, super crispy golden fries, and a chilled refreshing fizzy drink.</p>
+            <div class="slide-cta">
+              <button class="btn btn-primary" onclick="addToCart(12); openCart();">GET COMBO · ₹249</button>
+              <button class="btn btn-ghost" onclick="go('menu'); setCat('Burgers'); if(document.getElementById('fullMenu').classList.contains('hidden')) toggleFullMenu();">SEE ALL COMBOS →</button>
+            </div>
+          </div>
+          <div class="slide-art">
+            <div class="slide-img-container">
+              <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=800&h=800&fit=crop&q=85&auto=format" alt="Lazy Trio Combo Meal">
+            </div>
+            <div class="slide-floating-badge">🍱 SAVE ₹38</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: Warm Choco Lava Cake -->
+      <div class="slide" style="background: radial-gradient(circle at 75% 50%, rgba(180, 50, 20, 0.18) 0%, transparent 60%), linear-gradient(135deg, #150805 0%, #08080a 100%);">
+        <div class="wrap slide-inner">
+          <div class="slide-content">
+            <span class="slide-tag">SWEET INDULGENCE</span>
+            <h1 class="slide-title">WARM & GOOEY<br><span class="o">CHOCO LAVA</span></h1>
+            <p class="slide-desc">Dive into chocolate heaven. Rich, warm cake with a molten, gooey chocolate lava center that melts in your mouth.</p>
+            <div class="slide-cta">
+              <button class="btn btn-primary" onclick="addToCart(10); openCart();">TREAT YOURSELF · ₹79</button>
+              <button class="btn btn-ghost" onclick="go('menu'); setCat('Desserts'); if(document.getElementById('fullMenu').classList.contains('hidden')) toggleFullMenu();">VIEW DESSERTS →</button>
+            </div>
+          </div>
+          <div class="slide-art">
+            <div class="slide-img-container" style="box-shadow: 0 25px 60px rgba(180, 50, 20, 0.25);">
+              <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=800&h=800&fit=crop&q=85&auto=format" alt="Choco Lava Cake">
+            </div>
+            <div class="slide-floating-badge">🍰 HOT SELLER</div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Navigation Controls -->
+    <button class="slider-arrow prev" onclick="prevSlide()" aria-label="Previous Slide">‹</button>
+    <button class="slider-arrow next" onclick="nextSlide()" aria-label="Next Slide">›</button>
+    <div class="slider-dots" id="sliderDots"></div>
   </section>
 
   <div class="wrap" id="about">
@@ -608,7 +921,7 @@ footer{background:#050506;border-top:1px solid var(--line);margin-top:40px;paddi
         <img src="mascot.png" alt="Lazy Bite Mascot" class="mascot-img">
         <div class="offer-mid">
           <span class="lbl">OPENING DAY SPECIAL</span>
-          <div class="big">FIRST <b>100</b> COLD COFFEE <span style="color:var(--orange)">FREE!</span></div>
+          <div class="big">FIRST <b>200</b> COLD COFFEE <span style="color:var(--orange)">FREE!</span></div>
           <p>— FOR FIRST 100 CUSTOMERS ONLY —</p>
           <button class="btn btn-primary btn-sm" style="margin-top:16px" onclick="toast('First 100 customers get a free Cold Coffee! ☕')">KNOW MORE →</button>
         </div>
@@ -1040,8 +1353,75 @@ function toast(msg,type){ const t=document.getElementById('toast'); t.textConten
 function showErr(id,msg){ const e=document.getElementById(id); e.textContent=msg; e.classList.remove('hidden'); }
 function clearErr(id){ document.getElementById(id).classList.add('hidden'); }
 
+/* ================= HERO SLIDER ================= */
+let currentSlideIndex = 0;
+let slideInterval;
+let slides = [];
+
+function initSlider() {
+  slides = document.querySelectorAll('.slide');
+  if (!slides.length) return;
+  
+  // Generate dots
+  const dotsContainer = document.getElementById('sliderDots');
+  if (dotsContainer) {
+    dotsContainer.innerHTML = Array.from({ length: slides.length })
+      .map((_, i) => `<div class="slider-dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></div>`)
+      .join('');
+  }
+  
+  // Start autoplay
+  startSlideShow();
+  
+  // Pause on hover
+  const sliderEl = document.querySelector('.hero-slider');
+  if (sliderEl) {
+    sliderEl.addEventListener('mouseenter', stopSlideShow);
+    sliderEl.addEventListener('mouseleave', startSlideShow);
+  }
+}
+
+function showSlide(index) {
+  if (!slides || !slides.length) return;
+  if (index >= slides.length) index = 0;
+  if (index < 0) index = slides.length - 1;
+  currentSlideIndex = index;
+  
+  slides.forEach((slide, i) => {
+    slide.classList.toggle('active', i === index);
+  });
+  
+  const dots = document.querySelectorAll('.slider-dot');
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i === index);
+  });
+}
+
+function nextSlide() {
+  showSlide(currentSlideIndex + 1);
+}
+
+function prevSlide() {
+  showSlide(currentSlideIndex - 1);
+}
+
+function goToSlide(index) {
+  showSlide(index);
+  // Reset slideshow timer on manual navigation
+  startSlideShow();
+}
+
+function startSlideShow() {
+  stopSlideShow();
+  slideInterval = setInterval(nextSlide, 5000);
+}
+
+function stopSlideShow() {
+  if (slideInterval) clearInterval(slideInterval);
+}
+
 /* ================= INIT ================= */
-renderFeatured(); renderCats(); renderMenu(); updateCartCount(); updateAuthUI(); applySession();
+renderFeatured(); renderCats(); renderMenu(); updateCartCount(); updateAuthUI(); applySession(); initSlider();
 if(DB.session && DB.session.role==='admin') go('admin');
 </script>
 </body>
